@@ -1,0 +1,77 @@
+name: aistory_generator
+description: "A new Flutter project."
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.2.0-134.0.dev <4.0.0'
+
+flutter_native_splash:
+  color: "#ffffff"
+  image: assets/app_logo_Xbig.png
+  android: true
+  ios: true
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/app_logo_Xbig.png"
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  cupertino_icons: ^1.0.2
+  get: ^4.6.6
+  device_preview: ^1.1.0
+  google_fonts: 6.1.0
+  get_storage: ^2.1.1
+  flutter_screenutil: ^5.9.0
+  flutter_credit_card: ^3.0.7
+  flutter_native_splash: ^2.3.2
+  scrollable_positioned_list: ^0.3.8
+  flutter_launcher_icons: ^0.13.1
+  flutter_svg: ^2.0.7
+  hng_authentication: ^0.1.4
+  share_plus: ^4.5.3
+  hngx_openai:
+    git:
+      url: https://github.com/hngx-org/openai-package.git
+      ref: main
+  carousel_slider: ^4.2.1
+  in_app_payment: ^0.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+  flutter_lints: ^2.0.0
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter packages.
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  assets:
+    - assets/
+  
+
+
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic

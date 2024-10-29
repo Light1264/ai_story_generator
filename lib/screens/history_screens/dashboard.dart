@@ -1,0 +1,181 @@
+import 'package:flutter/material.dart';
+import '../../constants/app_theme.dart';
+import '../../constants/app_image.dart';
+import '../../widgets/custom_text.dart';
+import '../../widgets/size_config.dart';
+import '../ai_screens/meet_with_ai_screen.dart';
+import '../profile.dart';
+import 'your_story.dart';
+
+class DashBoardScreen extends StatefulWidget {
+  const DashBoardScreen({super.key});
+
+  @override
+  State<DashBoardScreen> createState() => _DashBoardScreenState();
+}
+
+class _DashBoardScreenState extends State<DashBoardScreen> {
+  int currentPage = 0;
+  List<Widget> pages = const [
+    YourStoryScreen(),
+    WithAllCategoryScreen(),
+    UserProfileScreen(),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    SizeConfig.init(context);
+    return Scaffold(
+      backgroundColor: AppTheme.whiteColor,
+      body: SafeArea(
+        child: Stack(
+          children: [
+            pages[currentPage],
+            Positioned(
+                left: 0,
+                right: 0,
+                bottom: 0,
+                child: buildBottomNav(currentPage)),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Container buildBottomNav(int index) {
+    return Container(
+      color: AppTheme.whiteColor,
+      padding: EdgeInsets.symmetric(
+          horizontal: getProportionateScreenWidth(24),
+          vertical: getProportionateScreenHeight(2)),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          SizedBox(
+            width: getProportionateScreenWidth(85),
+            height: getProportionateScreenHeight(82),
+            child: GestureDetector(
+              onTap: () {
+                setState(() {
+                  currentPage = 0;
+                });
+              },
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: getProportionateScreenHeight(49),
+                    width: getProportionateScreenWidth(73),
+                    child: Image.asset(AppImages.books),
+                  ),
+                  customCentreText(
+                      inputText: 'Your Stories',
+                      fontSize: 16,
+                      weight: FontWeight.w500,
+                      colorName: AppTheme.blackColor),
+                  Container(
+                    height: getProportionateScreenHeight(2),
+                    width: getProportionateScreenWidth(32),
+                    color: index == 0
+                        ? AppTheme.primaryColor
+                        : AppTheme.whiteColor,
+                  )
+                ],
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                currentPage = 1;
+              });
+            },
+            child: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                SizedBox(
+                  height: getProportionateScreenHeight(75),
+                  width: getProportionateScreenWidth(75),
+                ),
+                Positioned(
+                  bottom: getProportionateScreenHeight(40),
+                  child: SizedBox(
+                    height: getProportionateScreenHeight(75),
+                    width: getProportionateScreenWidth(75),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            currentPage = 1;
+                          });
+                        },
+                        style: ElevatedButton.styleFrom(
+                            elevation: 0,
+                            backgroundColor: AppTheme.redColor,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                side: BorderSide(color: AppTheme.redColor))),
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                              right: getProportionateScreenWidth(60)),
+                          child: Icon(
+                            Icons.add_rounded,
+                            color: AppTheme.whiteColor,
+                            size: getProportionateScreenWidth(30),
+                          ),
+                        )),
+                  ),
+                )
+              ],
+            ),
+          ),
+          SizedBox(
+            width: getProportionateScreenWidth(85),
+            height: getProportionateScreenHeight(82),
+            child: InkWell(
+              onTap: () {
+                setState(() {
+                  currentPage = 2;
+                });
+              },
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: getProportionateScreenHeight(49),
+                    width: getProportionateScreenWidth(73),
+                    child: Image.asset(
+                      AppImages.profileAvatar,
+                      scale: 4,
+                    ),
+                  ),
+                  customCentreText(
+                      inputText: 'Profile',
+                      fontSize: 16,
+                      weight: FontWeight.w500,
+                      colorName: AppTheme.blackColor),
+                  Container(
+                    height: getProportionateScreenHeight(2),
+                    width: getProportionateScreenWidth(32),
+                    color: index == 2
+                        ? AppTheme.primaryColor
+                        : AppTheme.whiteColor,
+                  )
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+BottomNavigationBarItem _buildBottomNavigationBarItem({
+  required Widget icon,
+  required String title,
+  required Widget activeIcon,
+}) {
+  return BottomNavigationBarItem(
+    activeIcon: activeIcon,
+    icon: icon,
+    label: title,
+  );
+}
